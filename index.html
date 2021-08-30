@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Allison&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="image">
+                <img src="https://lh3.googleusercontent.com/proxy/UNV91YWN2BAiFsdlhA2WydiPggN34L4-S5PFIWB4Dltsr7M5UkZHakJehSDkkctPw9ya7I-HfX2IYvNt7Kuyfe-zR-u5OfpUemNPynG_Uwe6ZVeBcfUifbuGmMEtRHVuLQR_Swbtr4psldSitQ" alt="">
+
+            </div>
+            <div class="date">
+
+            </div>
+           
+            <div class="quote">
+                <h1 class="start">Advice-Slip</h1>
+                <button class="btn" onclick="resp()">Get Advice for day</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+// fetching data
+
+async function resp(){
+    const response = await fetch("https://api.adviceslip.com/advice")
+    const data = await response.json()
+    document.querySelector(".quote").innerHTML = `
+    <h3 class="slip">${data.slip.advice}</h3>
+    <button class="btn" onclick = "back()"> Back </button>
+`
+}
+
+
+// adding date
+
+function getDate(){
+    let date = new Date().toDateString()
+    document.querySelector(".date").innerHTML =`
+    <h2>${date}</h2>   `
+}
+getDate();
+
+// resetting to previous
+
+function back(){
+    document.querySelector(".quote").innerHTML=`
+    <h1 class="start">Advice-Slip</h1>
+    <button class="btn" onclick="resp()">Get Advice for day</button>
+    `
+}
+
+</script>
+</html>
